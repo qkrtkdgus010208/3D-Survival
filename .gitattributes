@@ -1,2 +1,5 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# 기본적으로 모든 파일을 언어 분석에서 제외
+* linguist-vendored
+
+# C# 파일만 분석 대상으로 포함
+*.cs linguist-vendored=false
