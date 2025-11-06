@@ -686,7 +686,7 @@ MonoBehaviour:
   curValue: 0
   maxValue: 100
   startValue: 100
-  passiveValue: 1
+  passiveValue: 2
   uiBar: {fileID: 1738862339}
 --- !u!114 &702969324
 MonoBehaviour:
