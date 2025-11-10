@@ -77,7 +77,6 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started && (IsGrounded() || canDoubleJump) && jumpCount < 2)
         {
             jumpCount++;
-            Debug.Log(jumpCount);
             rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
         }
     }
