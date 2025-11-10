@@ -6,7 +6,9 @@ public class Interaction : MonoBehaviour
 {
     public float checkRate = 0.05f;    // 상호작용 오브젝트 체크 시간
     private float lastCheckTime;       // 마지막 상호작용 체크 시간
-    public float maxCheckDistance;     // 최대 체크 거리
+    public float maxcheckDistance;
+    public float checkDistanceOne;     // 1인칭 최대 체크 거리
+    public float checkDistanceThree;     // 3인칭 최대 체크 거리
     public LayerMask layerMask;
 
     public GameObject curInteractGameObject;  // 현재 상호작용 게임오브젝트
@@ -18,6 +20,7 @@ public class Interaction : MonoBehaviour
     void Start()
     {
         camera = Camera.main;
+        maxcheckDistance = checkDistanceOne;
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class Interaction : MonoBehaviour
             // 2강 Ray 관련 로직 복습하기
             Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
 
-            if (Physics.Raycast(ray, out RaycastHit hit, maxCheckDistance, layerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, maxcheckDistance, layerMask))
             {
                 if (hit.collider.gameObject != curInteractGameObject)
                 {

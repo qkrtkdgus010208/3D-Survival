@@ -19,8 +19,12 @@ public class PlayerController : MonoBehaviour
     public float maxXLook;  // 최대 시야각
     private float camCurXRot;
     public float lookSensitivity; // 카메라 민감도
+    public Vector3 thirdPersonView; // 3인칭 효과
+    private bool IsthirdPersonView;
+    public Interaction interaction;
 
     private Vector2 mouseDelta;  // 마우스 변화값
+
 
     [HideInInspector]
     public bool canLook = true;
@@ -29,9 +33,12 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigidbody;
 
+    private Camera camera;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        camera = Camera.main;
     }
 
     void Start()
@@ -81,6 +88,25 @@ public class PlayerController : MonoBehaviour
             {
                 jumpCount++;
                 rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            }
+        }
+    }
+
+    public void OnViewInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            IsthirdPersonView = !IsthirdPersonView;
+
+            if (IsthirdPersonView)
+            {
+                interaction.maxcheckDistance = interaction.checkDistanceOne;
+                camera.transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                interaction.maxcheckDistance = interaction.checkDistanceThree;
+                camera.transform.localPosition = thirdPersonView;
             }
         }
     }
