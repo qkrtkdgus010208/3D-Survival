@@ -32,7 +32,7 @@ public class EquipTool : Equip
             {
                 attacking = true;
                 animator.SetTrigger("Attack");
-                Invoke("OnCanAttack", attackRate);
+                Invoke(nameof(OnCanAttack), attackRate);
             }
         }
     }
@@ -52,6 +52,11 @@ public class EquipTool : Equip
             if (doesGatherResources && hit.collider.TryGetComponent(out Resource resource))
             {
                 resource.Gather(hit.point, hit.normal);
+            }
+
+            if (hit.collider.TryGetComponent(out IDamagable damagable))
+            {
+                damagable.TakePhysicalDamage(damage);
             }
         }
     }
