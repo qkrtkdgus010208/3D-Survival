@@ -32,10 +32,8 @@ public class MusicZone : MonoBehaviour
     // (점점 커지게)
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("진입");
         if (other.CompareTag("Player"))
         {
-            Debug.Log("진입1");
             targetVolume = maxVolume;
         }
     }
@@ -44,10 +42,8 @@ public class MusicZone : MonoBehaviour
     // (점점 작아지게)
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("탈출");
         if (other.CompareTag("Player"))
         {
-            Debug.Log("탈출1");
             targetVolume = 0.0f;
         }
     }
