@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private Vector2 curMovementInput;  // 현재 입력 값
     public float jumpPower;
+    public float jumpCost;
     public int jumpCount;
     public bool canDoubleJump;
     public LayerMask groundLayerMask;  // 레이어 정보
@@ -76,8 +77,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && (IsGrounded() || canDoubleJump) && jumpCount < 2)
         {
-            jumpCount++;
-            rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            if (CharacterManager.Instance.Player.condition.UseStamina(jumpCost))
+            {
+                jumpCount++;
+                rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            }
         }
     }
 

@@ -1020,6 +1020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpPower: 80
+  jumpCost: 20
   jumpCount: 0
   canDoubleJump: 0
   groundLayerMask:

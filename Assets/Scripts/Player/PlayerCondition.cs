@@ -68,6 +68,16 @@ public class PlayerCondition : MonoBehaviour, IDamagable
             hunger.Add(amount);
     }
 
+    public bool UseStamina(float amount)
+    {
+        if (stamina.curValue - amount < 0)
+        {
+            return false;
+        }
+        stamina.Subtract(amount);
+        return true;
+    }
+
     public void Booster(float speed)
     {
         CharacterManager.Instance.Player.controller.moveSpeed = speed;
@@ -121,15 +131,5 @@ public class PlayerCondition : MonoBehaviour, IDamagable
             return;
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
-    }
-
-    public bool UseStamina(float amount)
-    {
-        if (stamina.curValue - amount < 0)
-        {
-            return false;
-        }
-        stamina.Subtract(amount);
-        return true;
     }
 }
