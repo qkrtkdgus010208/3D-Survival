@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 // Condition 개별 바는 같은 로직을 공유
@@ -27,10 +28,28 @@ public class Condition : MonoBehaviour
         curValue = Mathf.Min(curValue + amount, maxValue);
     }
 
+    public IEnumerator AddTic(float amount)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            curValue = Mathf.Min(curValue + amount, maxValue);
+            yield return new WaitForSeconds(0.8f);
+        }
+    }
+
     public void Subtract(float amount)
     {
         // 둘 중의 큰 값 (ex. 0보다 작아지면 0)
         curValue = Mathf.Max(curValue - amount, 0.0f);
+    }
+
+    public IEnumerator SubtractTic(float amount)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            curValue = Mathf.Min(curValue + amount, maxValue);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     public float GetPercentage()

@@ -48,6 +48,9 @@ public class NPC : MonoBehaviour, IDamagable
     // NPC모델의 meshRenderer를 담아둘 배열 → 공격 받을 때 색 변경 예정
     private SkinnedMeshRenderer[] meshRenderers;
 
+    private bool isInvulnerable = false;
+    public bool IsInvulnerable => isInvulnerable;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();

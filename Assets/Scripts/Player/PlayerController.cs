@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private Vector2 curMovementInput;  // 현재 입력 값
     public float jumpPower;
+    public int jumpCount;
+    public bool canDoubleJump;
     public LayerMask groundLayerMask;  // 레이어 정보
 
     [Header("Look")]
@@ -72,8 +74,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && IsGrounded())
+        if (context.phase == InputActionPhase.Started && (IsGrounded() || canDoubleJump) && jumpCount < 2)
         {
+            jumpCount++;
+            Debug.Log(jumpCount);
             rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
         }
     }
@@ -123,6 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
             {
+                jumpCount = 0;
                 return true;
             }
         }

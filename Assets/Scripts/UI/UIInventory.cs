@@ -231,9 +231,15 @@ public class UIInventory : MonoBehaviour
                 switch (selectedItem.consumables[i].type)
                 {
                     case ConsumableType.Health:
-                        condition.Heal(selectedItem.consumables[i].value); break;
+                        condition.Heal(selectedItem.consumables[i].value, selectedItem.consumables[i].isTic); break;
                     case ConsumableType.Hunger:
-                        condition.Eat(selectedItem.consumables[i].value); break;
+                        condition.Eat(selectedItem.consumables[i].value, selectedItem.consumables[i].isTic); break;
+                    case ConsumableType.Speed:
+                        condition.Booster(selectedItem.consumables[i].value); break;
+                    case ConsumableType.Invulnerable:
+                        condition.SetInvulnerability(selectedItem.consumables[i].value); break;
+                    case ConsumableType.DoubleJump:
+                        condition.DoubleJump(selectedItem.consumables[i].value); break;
                 }
             }
             RemoveSelctedItem();

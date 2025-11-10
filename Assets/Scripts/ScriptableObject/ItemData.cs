@@ -10,7 +10,10 @@ public enum ItemType
 public enum ConsumableType
 {
     Hunger,
-    Health
+    Health,
+    Speed,
+    Invulnerable,
+    DoubleJump,
 }
 
 [System.Serializable]
@@ -18,6 +21,7 @@ public class ItemDataConsumable
 {
     public ConsumableType type;
     public float value;
+    public bool isTic;
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
