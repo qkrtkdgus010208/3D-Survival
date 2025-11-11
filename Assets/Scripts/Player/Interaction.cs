@@ -23,6 +23,16 @@ public class Interaction : MonoBehaviour
         maxcheckDistance = checkDistanceOne;
     }
 
+    private void OnEnable()
+    {
+        CharacterManager.Instance.Player.controller.OnChangeView += ChangeView;
+    }
+
+    private void OnDisable()
+    {
+        CharacterManager.Instance.Player.controller.OnChangeView -= ChangeView;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -66,5 +76,10 @@ public class Interaction : MonoBehaviour
             curInteractable = null;
             promptText.gameObject.SetActive(false);
         }
+    }
+
+    private void ChangeView()
+    {
+        maxcheckDistance = CharacterManager.Instance.Player.controller.IsthirdPersonView ? checkDistanceThree : checkDistanceOne;
     }
 }

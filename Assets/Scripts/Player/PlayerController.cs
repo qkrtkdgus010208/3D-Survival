@@ -20,8 +20,9 @@ public class PlayerController : MonoBehaviour
     private float camCurXRot;
     public float lookSensitivity; // 카메라 민감도
     public Vector3 thirdPersonView; // 3인칭 효과
-    private bool IsthirdPersonView;
+    public bool IsthirdPersonView;
     public Interaction interaction;
+    public Action OnChangeView;
 
     private Vector2 mouseDelta;  // 마우스 변화값
 
@@ -39,6 +40,16 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         camera = Camera.main;
+    }
+
+    private void OnEnable()
+    {
+        OnChangeView += ViewChange;
+    }
+
+    private void OnDisable()
+    {
+        OnChangeView -= ViewChange;
     }
 
     void Start()
@@ -96,19 +107,17 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            IsthirdPersonView = !IsthirdPersonView;
-
-            if (IsthirdPersonView)
-            {
-                interaction.maxcheckDistance = interaction.checkDistanceOne;
-                camera.transform.localPosition = Vector3.zero;
-            }
-            else
-            {
-                interaction.maxcheckDistance = interaction.checkDistanceThree;
-                camera.transform.localPosition = thirdPersonView;
-            }
+            OnChangeView?.Invoke();
         }
+    }
+
+    private void ViewChange()
+    {
+        if (IsthirdPersonView)
+            camera.transform.localPosition = Vector3.zero;
+        else
+            camera.transform.localPosition = thirdPersonView;
+        IsthirdPersonView = !IsthirdPersonView;
     }
 
     private void Move()

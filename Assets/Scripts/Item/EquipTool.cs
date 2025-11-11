@@ -5,6 +5,8 @@ public class EquipTool : Equip
     public float attackRate;
     private bool attacking;
     public float attackDistance;
+    public float attackDistanceOne;
+    public float attackDistanceThree;
     public float useStamina;
 
     [Header("Resource Gathering")]
@@ -17,11 +19,21 @@ public class EquipTool : Equip
     private Animator animator;
     private Camera camera;
 
-
     private void Awake()
     {
         camera = Camera.main;
         animator = GetComponent<Animator>();
+        attackDistance = attackDistanceOne;
+    }
+
+    private void OnEnable()
+    {
+        CharacterManager.Instance.Player.controller.OnChangeView += ChangeView;
+    }
+
+    private void OnDisable()
+    {
+        CharacterManager.Instance.Player.controller.OnChangeView -= ChangeView;
     }
 
     public override void OnAttackInput()
@@ -59,5 +71,10 @@ public class EquipTool : Equip
                 damagable.TakePhysicalDamage(damage);
             }
         }
+    }
+
+    private void ChangeView()
+    {
+        attackDistance = CharacterManager.Instance.Player.controller.IsthirdPersonView ? attackDistanceThree : attackDistanceOne;
     }
 }
