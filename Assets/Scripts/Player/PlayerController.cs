@@ -23,10 +23,9 @@ public class PlayerController : MonoBehaviour
     public Vector3 thirdPersonView; // 3인칭 효과
     public bool IsthirdPersonView;
     public Interaction interaction;
-    public Action OnChangeView;
+    public event Action OnChangeView;
 
     private Vector2 mouseDelta;  // 마우스 변화값
-
 
     [HideInInspector]
     public bool canLook = true;
