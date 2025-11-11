@@ -17,11 +17,11 @@ public class EquipTool : Equip
     public int damage;
 
     private Animator animator;
-    private Camera camera;
+    private Camera cam;
 
     private void Awake()
     {
-        camera = Camera.main;
+        cam = Camera.main;
         animator = GetComponent<Animator>();
         attackDistance = attackDistanceOne;
     }
@@ -33,7 +33,8 @@ public class EquipTool : Equip
 
     private void OnDisable()
     {
-        CharacterManager.Instance.Player.controller.OnChangeView -= ChangeView;
+        if (CharacterManager.Instance != null && CharacterManager.Instance.Player != null && CharacterManager.Instance.Player.controller != null)
+            CharacterManager.Instance.Player.controller.OnChangeView -= ChangeView;
     }
 
     public override void OnAttackInput()
@@ -56,7 +57,7 @@ public class EquipTool : Equip
 
     public void OnHit()
     {
-        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, attackDistance))

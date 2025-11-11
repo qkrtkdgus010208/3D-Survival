@@ -32,14 +32,14 @@ public class PlayerController : MonoBehaviour
 
     public Action inventory;
 
-    private Rigidbody rigidbody;
+    private Rigidbody rigid;
 
-    private Camera camera;
+    private Camera cma;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        camera = Camera.main;
+        rigid = GetComponent<Rigidbody>();
+        cma = Camera.main;
     }
 
     private void OnEnable()
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
             if (CharacterManager.Instance.Player.condition.UseStamina(jumpCost))
             {
                 jumpCount++;
-                rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+                rigid.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
             }
         }
     }
@@ -116,12 +116,12 @@ public class PlayerController : MonoBehaviour
         if (IsthirdPersonView)
         {
             equipCamera.cullingMask = 1 << LayerMask.NameToLayer("Equip");
-            camera.transform.localPosition = Vector3.zero;
+            cma.transform.localPosition = Vector3.zero;
         }
         else
         {
             equipCamera.cullingMask = 0;
-            camera.transform.localPosition = thirdPersonView;
+            cma.transform.localPosition = thirdPersonView;
         }
         IsthirdPersonView = !IsthirdPersonView;
     }
@@ -132,9 +132,9 @@ public class PlayerController : MonoBehaviour
         // 현재 입력의 x 값은 x 축(right, 좌우)에 곱한다.
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;  // 방향에 속력을 곱해준다.
-        dir.y = rigidbody.velocity.y;  // y값은 velocity(변화량)의 y 값을 넣어준다.
+        dir.y = rigid.velocity.y;  // y값은 velocity(변화량)의 y 값을 넣어준다.
 
-        rigidbody.velocity = dir;  // 연산된 속도를 velocity(변화량)에 넣어준다.
+        rigid.velocity = dir;  // 연산된 속도를 velocity(변화량)에 넣어준다.
     }
 
     void CameraLook()

@@ -15,11 +15,11 @@ public class Interaction : MonoBehaviour
     private IInteractable curInteractable;    // 현재 상호작용 인터페이스
 
     public TextMeshProUGUI promptText;
-    private Camera camera;
+    private Camera cam;
 
     void Start()
     {
-        camera = Camera.main;
+        cam = Camera.main;
         maxcheckDistance = checkDistanceOne;
     }
 
@@ -30,7 +30,8 @@ public class Interaction : MonoBehaviour
 
     private void OnDisable()
     {
-        CharacterManager.Instance.Player.controller.OnChangeView -= ChangeView;
+        if (CharacterManager.Instance != null && CharacterManager.Instance.Player != null && CharacterManager.Instance.Player.controller != null)
+            CharacterManager.Instance.Player.controller.OnChangeView -= ChangeView;
     }
 
     // Update is called once per frame
@@ -41,7 +42,7 @@ public class Interaction : MonoBehaviour
             lastCheckTime = Time.time;
 
             // 2강 Ray 관련 로직 복습하기
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxcheckDistance, layerMask))
             {
