@@ -17,10 +17,13 @@ public class Interaction : MonoBehaviour
     public TextMeshProUGUI promptText;
     private Camera cam;
 
+    CharacterManager characterManager;
+
     void Start()
     {
         cam = Camera.main;
         maxcheckDistance = checkDistanceOne;
+        characterManager = CharacterManager.Instance;
     }
 
     private void OnEnable()
@@ -30,7 +33,7 @@ public class Interaction : MonoBehaviour
 
     private void OnDisable()
     {
-        if (CharacterManager.Instance != null && CharacterManager.Instance.Player != null && CharacterManager.Instance.Player.controller != null)
+        if (characterManager != null)
             CharacterManager.Instance.Player.controller.OnChangeView -= ChangeView;
     }
 

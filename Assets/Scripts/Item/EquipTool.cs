@@ -19,11 +19,18 @@ public class EquipTool : Equip
     private Animator animator;
     private Camera cam;
 
+    CharacterManager characterManager;
+
     private void Awake()
     {
         cam = Camera.main;
         animator = GetComponent<Animator>();
         attackDistance = attackDistanceOne;
+    }
+
+    private void Start()
+    {
+        characterManager = CharacterManager.Instance;
     }
 
     private void OnEnable()
@@ -33,7 +40,7 @@ public class EquipTool : Equip
 
     private void OnDisable()
     {
-        if (CharacterManager.Instance != null && CharacterManager.Instance.Player != null && CharacterManager.Instance.Player.controller != null)
+        if (characterManager != null)
             CharacterManager.Instance.Player.controller.OnChangeView -= ChangeView;
     }
 
