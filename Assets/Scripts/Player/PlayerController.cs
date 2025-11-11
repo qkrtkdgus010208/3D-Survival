@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Look")]
     public Transform cameraContainer;
+    public Camera equipCamera;
     public float minXLook;  // 최소 시야각
     public float maxXLook;  // 최대 시야각
     private float camCurXRot;
@@ -114,9 +115,15 @@ public class PlayerController : MonoBehaviour
     private void ViewChange()
     {
         if (IsthirdPersonView)
+        {
+            equipCamera.cullingMask = 1 << LayerMask.NameToLayer("Equip");
             camera.transform.localPosition = Vector3.zero;
+        }
         else
+        {
+            equipCamera.cullingMask = 0;
             camera.transform.localPosition = thirdPersonView;
+        }
         IsthirdPersonView = !IsthirdPersonView;
     }
 
