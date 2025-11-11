@@ -28,6 +28,8 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     private bool isInvulnerable = false;
     public bool IsInvulnerable => isInvulnerable;
 
+    CharacterManager characterManager;
+
     private void Update()
     {
         hunger.Subtract(hunger.passiveValue * Time.deltaTime);
@@ -42,6 +44,11 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         {
             Die();
         }
+    }
+
+    private void Start()
+    {
+        characterManager = CharacterManager.Instance;
     }
 
     public void Heal(float amount, bool isTic)
@@ -80,7 +87,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     public void Booster(float speed)
     {
-        CharacterManager.Instance.Player.controller.moveSpeed = speed;
+        characterManager.Player.controller.moveSpeed = speed;
         if (boosterCoroutine != null)
             StopCoroutine(boosterCoroutine);
         boosterCoroutine = StartCoroutine(ResetSpeed(5f));
@@ -89,7 +96,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public IEnumerator ResetSpeed(float duration)
     {
         yield return new WaitForSeconds(duration);
-        CharacterManager.Instance.Player.controller.moveSpeed = 5f;
+        characterManager.Player.controller.moveSpeed = 5f;
     }
 
     public void SetInvulnerability(float time)
@@ -115,9 +122,9 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     public IEnumerator ResetDoubleJump(float duration)
     {
-        CharacterManager.Instance.Player.controller.canDoubleJump = true;
+        characterManager.Player.controller.canDoubleJump = true;
         yield return new WaitForSeconds(duration);
-        CharacterManager.Instance.Player.controller.canDoubleJump = false;
+        characterManager.Player.controller.canDoubleJump = false;
     }
 
     public void Die()
