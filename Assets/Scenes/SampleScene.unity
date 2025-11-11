@@ -1032,6 +1032,7 @@ MonoBehaviour:
   maxXLook: 65
   lookSensitivity: 0.1
   thirdPersonView: {x: 0, y: 0.4, z: -2}
+  IsthirdPersonView: 0
   interaction: {fileID: 303265958}
   canLook: 1
 --- !u!114 &303265955
@@ -1048,7 +1049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 303265954}
   condition: {fileID: 303265957}
-  equip: {fileID: 0}
+  equip: {fileID: 303265959}
   itemData: {fileID: 0}
   dropPosition: {fileID: 1042419361}
 --- !u!114 &303265956
