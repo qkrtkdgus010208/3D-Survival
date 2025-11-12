@@ -29,19 +29,19 @@ public class MovePad : MonoBehaviour
             .SetUpdate(UpdateType.Fixed);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            other.transform.SetParent(this.transform);
+            collision.transform.SetParent(this.transform);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            other.transform.SetParent(null);
+            collision.transform.SetParent(null);
         }
     }
 }
