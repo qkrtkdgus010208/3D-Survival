@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class MovePad : MonoBehaviour
+public class MovePlatform : MonoBehaviour
 {
     public Vector3 endOffset;
     public float moveDuration = 5f;
@@ -15,10 +15,10 @@ public class MovePad : MonoBehaviour
         startPosition = transform.position;
         endPosition = startPosition + endOffset;
 
-        MovePlatform();
+        Move();
     }
 
-    private void MovePlatform()
+    private void Move()
     {
         if (moveDuration <= 0) return;
 
@@ -29,19 +29,19 @@ public class MovePad : MonoBehaviour
             .SetUpdate(UpdateType.Fixed);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            collision.transform.SetParent(this.transform);
+            other.transform.SetParent(this.transform);
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            collision.transform.SetParent(null);
+            other.transform.SetParent(null);
         }
     }
 }
