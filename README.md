@@ -8,6 +8,16 @@
 
 ---
 
+## 📷 스크린샷
+<img width="400" height="400" alt="스크린샷 2025-11-13 162128" src="https://github.com/user-attachments/assets/88ace9f9-3ecc-4940-87b3-273bae67c7e2" />
+<img width="400" height="400" alt="스크린샷 2025-11-13 162213" src="https://github.com/user-attachments/assets/36fe942c-4232-4b55-8505-8936309caeda" />
+<img width="400" height="400" alt="스크린샷 2025-11-13 162225" src="https://github.com/user-attachments/assets/be061373-e3fc-45ff-9831-af8bf2f6dbf7" />
+<img width="400" height="400" alt="스크린샷 2025-11-13 162326" src="https://github.com/user-attachments/assets/173f87ec-49d6-45b1-847b-52cda6eea061" />
+<img width="400" height="400" alt="스크린샷 2025-11-13 162347" src="https://github.com/user-attachments/assets/a9f26aac-fe09-4f02-9ed2-dedc847d0270" />
+<img width="400" height="400" alt="스크린샷 2025-11-13 162400" src="https://github.com/user-attachments/assets/0ed6baaa-7633-4df7-af81-eaa2ee54e392" />
+<img width="400" height="400" alt="스크린샷 2025-11-13 162417" src="https://github.com/user-attachments/assets/665d0b27-9727-43d0-8c25-ed38278df078" />
+
+
 ## 🕹️ 조작 방법
 | 조작키 | 기능 |
 |------|------|
